@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- <audio controls autoplay>
+    <source id="tts_source" type="audio/mpeg" src="http://tts.baidu.com/text2audio/text2audio?lan=zh&amp;ie=UTF-8&amp;spd=8&amp;text=">
+</audio> -->
+<script type="text/javascript">
+// var content = "hello"
+// var s = window.document.querySelector('#tts_source')
+// s.src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=8&text="+content
+// s.src = s.src + content;
+// s.parentNode.load();
+
+
+//百度TTS地址
+        var url = "http://tts.baidu.com/text2audio/text2audio?lan=zh&ie=UTF-8&spd=8&text="
+        //添加audio标签
+        var f = document.createDocumentFragment()
+        var audio = document.createElement("audio")
+        audio.controls="controls"
+        audio.autoplay="autoplay"
+        var source = document.createElement("source")
+        source.id = "tts_source"
+        source.type="audio/mpeg"
+        source.src= url
+        audio.appendChild(source)
+        f.appendChild(audio)
+        document.body.appendChild(f)
+
+        //添加输入框和按钮
+        var f1 = document.createDocumentFragment()
+
+        var form = document.createElement("form")
+        var textArea = document.createElement("textarea")
+        textArea.rows="25"
+        textArea.cols="50"
+        textArea.name="content"
+
+        var startBtn = document.createElement("input")
+        startBtn.type = "button"
+        startBtn.value = "Start"
+        startBtn.onclick = function(){
+            content = document.forms[0]["content"].value
+            var sorce = document.querySelector("#tts_source")
+            source.src = url + content
+            sorce.parentNode.load()
+        }
+        form.appendChild(textArea)
+        form.appendChild(startBtn)
+        f1.appendChild(form)
+        document.body.appendChild(f1)
+
+
+</script>
+</body>
+</html>
