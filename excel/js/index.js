@@ -10,7 +10,11 @@ $(document).on('change','#file', function(e) {
 	var files = e.target.files;
 	if(files.length == 0) return;
 	var f = files[0];
-	if(!/\.xlsx$/g.test(f.name)) {
+	// if(!/\.xlsx$/g.test(f.name)) {
+	// 	alert('仅支持读取xlsx格式！');
+	// 	return;
+	// }
+	if(!/\.xlsx$/g.test(f.name) && !/\.xls$/g.test(f.name)) {
 		alert('仅支持读取xlsx格式！');
 		return;
 	}
