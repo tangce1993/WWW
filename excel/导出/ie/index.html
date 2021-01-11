@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<table id="tableid">
+	<tbody>
+	<tr>
+		<td>a</td>
+	</tr>
+	</tbody>
+</table>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+	<script src='index.js'></script>
+	<script>
+// JavaScript Document
+//调用方法
+  var test=new PageToExcel("tableid",0,255,"aa.xls");//table id , 第几行开始，最后一行颜色 ，保存的文件名
+  test.CreateExcel(false);
+  test.Exec();
+  test.SaveAs();
+  test.CloseExcel();
+// LastRowColor 0黑色 255红色
+
+	</script>
+</body>
+</html>
