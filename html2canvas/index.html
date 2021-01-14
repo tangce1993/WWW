@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<a href="" style="display: none" id="exportImage"></a>
+	<button class="ui button orange" type="button" onclick="exportImage()" title="导出图片">导出</button>
+	<div>
+		<textarea class="ent-page-content"></textarea>
+	</div>
+	<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+	<script src='html2canvas.js'></script>
+	<script type="text/javascript">
+function exportImage() {
+  html2canvas($(".ent-page-content"),{scale:1}).then(function (canvas) {
+    //newName,保存图片的新名称，防止重复
+    var newName = new Date().getTime().toString(16) + Math.ceil(Math.random() * 10000).toString(16);
+    var imgUri = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); // 获取生成的图片的url
+    $("#exportImage").attr("download", newName + ".png").attr("href", imgUri);
+    $("#exportImage")[0].click();
+  });
+}
+	</script>
+</body>
+</html>
