@@ -41,9 +41,11 @@ function readWorkbook(workbook) {
 	console.log('worksheet',worksheet);
 	console.log('json',json);
 	$excel.workbook=workbook;
-	$excel.merges=worksheet['!merges'];
+	// $excel.merges=worksheet['!merges'];
+	$excel.merges=worksheet['!range'];
+	
 	$excel.json=json;
-	mergeCellsHandle(worksheet['!merges']);// 单元格数据处理
+	mergeCellsHandle($excel.merges);// 单元格数据处理
 	// $('#result').html(jsontable());
 	var csv = XLSX.utils.sheet_to_csv(worksheet);
 	$excel.csv=csv;
@@ -174,3 +176,21 @@ function csv2table(csv){
 	html += '</table>';
 	return html;
 };
+
+
+　function download(filename, text) {
+            var pom = document.createElement('a');
+            pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            pom.setAttribute('download', filename);
+            if (document.createEvent) {
+                var event = document.createEvent('MouseEvents');
+                event.initEvent('click', true, true);
+                pom.dispatchEvent(event);
+            } else {
+                pom.click();
+            }
+        }
+        var svgdata = {
+
+        }
+        // download("data.txt",JSON.stringify(data));
