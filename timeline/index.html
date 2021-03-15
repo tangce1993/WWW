@@ -1,0 +1,273 @@
+<html class="" lang="zh-CN"><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>快速标注工具平台</title>
+  <meta charset="utf-8">
+  <meta content="always" name="referrer">
+  <meta content="Chrome=1,IE=edge" http-equiv="X-UA-Compatible">
+  <link href="css/base.css" media="screen" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/timeline.css">
+  <link rel="stylesheet" href="css/index.css">
+  <style>
+    @media screen and (max-width: 1191px) {
+      .ent-page-content .crumb-box.item {
+        display: none;
+      }
+    }
+
+    .ent-page-content {
+      overflow: hidden;
+    }
+
+    #kkpager {
+      height: 71px;
+    }
+
+    .document-list-content .navTitle {
+      margin-right: 0;
+    }
+
+    .document-list-box .delete {
+      width: 40px !important;
+    }
+
+    .document-list-box .delete img {
+      margin-top: 18px;
+      width: 18px;
+    }
+  </style>
+</head>
+
+<body class="ent-dashboard-page ent-issues-page dimmable" id="issues-index">
+  <div class="ent-page-wrapper">
+    <!-- header start -->
+    <header class="enterprise" id="git-header-nav">
+      <div class="ui menu">
+        <div class="enterprise text item">
+          <a href="">
+            <img alt="No_enterprise_avatar" class="ui inline image enterprise" src="img/no_enterprise_avatar.png">
+          </a>
+          <a href="" title="" id="project-title">测试生成项目</a>
+        </div>
+        <div class="item enterprise-navbar-notices" id="navbar-notices">
+          <div class="text item"></div>
+        </div>
+        <div class="right menu userbar" id="git-nav-user-bar">
+          <div class="right userbar menu" id="git-nav-user-bar">
+            <div class="item ui dropdown empty" id="notice-dropdown">
+              <a class="remind-button"><i class="iconfont icon-remind"></i>
+                <div class="notice-count total"></div>
+              </a>
+              <div class="notice-dropdown-panel menu" style="display: none;">
+                <div class="notice-dropdown-panel-header">
+                  <div class="tab taskTab  active">
+                    <div class="content">
+                      任务消息
+                      <div class="notice-count infos"></div>
+                    </div>
+                  </div>
+                  <div class="tab projectTab">
+                    <div class="content">
+                      项目消息
+                      <div class="notice-count referer"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item notice-dropdown-panel-container">
+                  <div class="ui dimmer over active">
+                    <div class="ui loader"></div>
+                  </div>
+                  <div class="notice-list notice-list-project" style="display: none;"><li class="project-msg-item classify noti">
+            <a class="text" href="taskList.html?type=manage&amp;projectId=69&amp;projectTitle=金融科技知识图谱建设演示">
+              <i class="iconfont iconfont-status icon-task-state-1" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+              开始 ：
+              <span title="金融科技知识图谱建设演示">金融科技知识图谱建设演示</span>
+            </a>
+            <span class="time">2021-01-19 17:11:45</span>
+          </li><li class="project-msg-item classify noti">
+            <a class="text" href="taskList.html?type=manage&amp;projectId=67&amp;projectTitle=事件本体提取">
+              <i class="iconfont iconfont-status icon-task-state-1" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+              开始 ：
+              <span title="事件本体提取">事件本体提取</span>
+            </a>
+            <span class="time">2021-01-21 14:30:02</span>
+          </li><li class="project-msg-item classify noti">
+            <a class="text" href="taskList.html?type=manage&amp;projectId=67&amp;projectTitle=事件本体提取">
+              <i class="iconfont iconfont-status icon-task-state-1" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+              开始 ：
+              <span title="事件本体提取">事件本体提取</span>
+            </a>
+            <span class="time">2021-01-21 10:04:40</span>
+          </li><li class="project-msg-item classify noti">
+            <a class="text" href="taskList.html?type=manage&amp;projectId=67&amp;projectTitle=事件本体提取">
+              <i class="iconfont iconfont-status icon-task-state-1" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+              开始 ：
+              <span title="事件本体提取">事件本体提取</span>
+            </a>
+            <span class="time">2021-01-21 10:00:18</span>
+          </li><li class="project-msg-item classify noti">
+            <a class="text" href="taskList.html?type=manage&amp;projectId=67&amp;projectTitle=事件本体提取">
+              <i class="iconfont iconfont-status icon-task-state-1" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+              开始 ：
+              <span title="事件本体提取">事件本体提取</span>
+            </a>
+            <span class="time">2021-01-21 14:29:51</span>
+          </li></div>
+                  <div class="notice-list notice-list-task" style="display: block;"><li class="task-msg-item classify noti">
+              <a class="text" href="taskOperation.html?type=manage&amp;projectId=8&amp;projectTitle=测试生成项目&amp;documentId=10&amp;taskId=7&amp;taskType=update">
+                <i class="iconfont iconfont-status icon-task-state-7" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(236, 0, 25);"></i> 
+                取消 ：
+                <span title="任务二">任务二</span>
+              </a>
+              <span class="time">2020-09-15 11:16:21</span>
+            </li><li class="task-msg-item classify noti">
+              <a class="text" href="taskOperation.html?type=manage&amp;projectId=64&amp;projectTitle=测试-enhanced V.S. normal&amp;documentId=43887&amp;taskId=244&amp;taskType=update">
+                <i class="iconfont iconfont-status icon-task-state-6" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+                已排期 ：
+                <span title="Normal-test">Normal-test</span>
+              </a>
+              <span class="time">2020-11-10 17:14:16</span>
+            </li><li class="task-msg-item classify noti">
+              <a class="text" href="taskOperation.html?type=manage&amp;projectId=64&amp;projectTitle=测试-enhanced V.S. normal&amp;documentId=43903&amp;taskId=245&amp;taskType=update">
+                <i class="iconfont iconfont-status icon-task-state-6" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+                已排期 ：
+                <span title="enhanced">enhanced</span>
+              </a>
+              <span class="time">2020-10-13 10:31:34</span>
+            </li><li class="task-msg-item classify noti">
+              <a class="text" href="taskOperation.html?type=manage&amp;projectId=64&amp;projectTitle=测试-enhanced V.S. normal&amp;documentId=43887&amp;taskId=244&amp;taskType=update">
+                <i class="iconfont iconfont-status icon-task-state-21" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(74, 144, 226);"></i> 
+                挂起 ：
+                <span title="Normal-test">Normal-test</span>
+              </a>
+              <span class="time">2020-11-10 17:13:58</span>
+            </li><li class="task-msg-item classify noti">
+              <a class="text" href="taskOperation.html?type=manage&amp;projectId=64&amp;projectTitle=测试-enhanced V.S. normal&amp;documentId=43887&amp;taskId=244&amp;taskType=update">
+                <i class="iconfont iconfont-status icon-task-state-6" style="font-size: 14px; padding-top: 1px; vertical-align: bottom; color: rgb(254, 188, 8);"></i> 
+                已排期 ：
+                <span title="Normal-test">Normal-test</span>
+              </a>
+              <span class="time">2020-10-13 10:27:39</span>
+            </li></div>
+                  <div class="notice-dropdown-panel-blank" style="display: none;">
+                    暂没有新消息
+                  </div>
+                </div>
+                <div class="notice-dropdown-panel-footer">
+                  <div class="action">
+                    <div class="side left">
+                      <a href="javascript: void(0);" class="mark-notices">当前标记为已读
+                      </a></div>
+                    <div class="side right">
+                      <a href="javascript: void(0);" class="load-all">查看全部
+                      </a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ui dropdown item" id="git-nav-user" tabindex="0">
+              <a>
+                <img alt="" class="ui avatar image ufo5260987423-avatar" src="">
+                <span class="avatar-box"></span>
+              </a>
+              <i class="dropdown icon"></i>
+              <div class="right menu" tabindex="-1" style="display: none;">
+                <a href="personalInfo.html" class="item">
+                  <i class="iconfont icon-ic-home"></i>个人资料
+                </a>
+                <div class="divider"></div>
+                <a class="item destroy-user-session escBtn" data-method="delete" rel="nofollow">
+                  <i class="iconfont icon-exit"></i>退出
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <!-- 一级导航start -->
+    <div class="workbench-sidebar" id="dashboard-sidebar">
+      <div class="ui fluid vertical menu">
+        <a class="item " title="任务" id="task-nav">
+          <i class="iconfont icon-nav-task"></i>
+          <div class="sidebar-icon-name">
+            任务
+          </div>
+        </a>
+        <a id="document-nav" class="item active" title="文档" style="display: block;">
+          <i class="iconfont icon-document"></i>
+          <div class="sidebar-icon-name">
+            文档
+          </div>
+        </a>
+        <a id="search-nav" class="item " title="检索" style="display: block;">
+          <i class="iconfont icon-search"></i>
+          <div class="sidebar-icon-name">
+            检索
+          </div>
+        </a>
+        <a id="statistics-nav" class="item" title="统计" style="display: block;">
+          <i class="iconfont icon-ic-chart"></i>
+          <div class="sidebar-icon-name">
+            统计
+          </div>
+        </a>
+        <a id="tool-nav" class="item" title="工具" style="display: block;">
+          <i class="iconfont icon-tag-devtool"></i>
+          <div class="sidebar-icon-name">
+            工具
+          </div>
+        </a>
+        <a id="manage-nav" class="item" title="管理">
+          <i class="setting iconfont icon-setting-16px"></i>
+          <div class="sidebar-icon-name">
+            管理
+          </div>
+        </a>
+        <a href="projectList.html" class="item by-project" title="项目" id="project-nav">
+          <i class="iconfont icon-project-mini"></i>
+          <div class="sidebar-icon-name">
+            项目
+          </div>
+        </a>
+      </div>
+    </div>
+    <!-- 一级导航end -->
+
+    <!-- 内容区start -->
+    <div class="ent-page-content">
+      <div class="ent-resource ent-projects">
+        <div class="ui secondary pointing menu ent-projects-header-menu">
+          <div class="float-right mr-3">
+          </div>
+          <div class="document-list-content" style="font-size: 14px;padding: 10px 33px 10px 20px;">
+            <div class="operateBox" style="justify-content: flex-end;">
+              <div class="load-in-list" style="margin-bottom:0">
+                <input type="file" id="importInput" multiple="multiple">
+                <button class="ui button orange lead-in-btn" id="previewBtn">预览</button>
+                <button class="ui button orange lead-in-btn" id="addBtn">添加</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="enterprise-set-frame">
+          <!-- timeline时间轴 -->
+          <div id="timeline"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 内容区end -->
+
+  </div>
+  <script type="text/javascript" src="js/jquery-min.js"></script>
+  <script type="text/javascript" src="js/storyjs-embed.js"></script>
+  <script type="text/javascript" src="js/timeline.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+
+</body></html>
