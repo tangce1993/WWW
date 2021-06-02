@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body{
+		height: 2000px
+	}
+/* 返回顶部 */
+.backToTopBtn{
+  position: fixed;
+  bottom: 50px;
+  right: 50%;
+  margin-right: -750px;
+  /* background:#ddd; */
+  text-align: center;
+  cursor: pointer;
+  display: none;
+}
+	</style>
+</head>
+<body>
+<div class="backToTopBtn">
+返回顶部
+	<img src="img/backToTop.png" title="返回顶部" alt="">
+</div>	
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+	<script type="text/javascript">
+//滚动条滚动到一定的位置 才出现 返回顶部
+$(window).scroll(function() {
+	var $scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop; //兼容浏览器
+	if ($scrollTop > 150) { //滚动高度可调，也可以为某个div的scrollTop，需要的可以自行修改
+		$(".backToTopBtn").show();
+	} else {
+		$(".backToTopBtn").hide();
+	};
+});
+// 返回顶部
+$(".backToTopBtn").click(function() {
+	$('body,html').animate({
+	scrollTop: 0
+	}, 1000);
+	return false;
+});
+	</script>
+</body>
+</html>
