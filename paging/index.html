@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="paging.css">
+</head>
+<body>
+ <div id="kkpager"></div>
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+	<script src ='paging.js'></script>
+	<script>
+var pageNo = 0;//默认第一页
+var ajaxEveryPageNum = 15;//每页几条数据
+var currActivePage = 0;//当前页展示
+var totalPages = 0; //总页数
+var totalElements = 0; //总条数
+var isNewPages = true;
+
+	$('#kkpager').empty();
+    totalPages = 10;
+    totalElements = 100;
+    paging(currActivePage, totalPages, totalElements, isNewPages);
+//page
+function paging(currActivePage, totalPage, totalNum, isNewPages) {
+  kkpager.generPageHtml({
+    pno: pageNo,
+    //总页码
+    total: totalPage,
+    //总数据条数
+    totalRecords: totalNum,
+    //默认值是link，可选link或者click
+    mode: 'click',
+    click: function (n) {
+      //手动选中按钮
+      this.selectPage(n);
+      currActivePage = n - 1;
+      // listData(n - 1, ajaxEveryPageNum, false);
+      // tableHtml(currActivePage, ajaxEveryPageNum, false);
+    }
+  }, isNewPages);
+};
+	</script>
+</body>
+</html>
