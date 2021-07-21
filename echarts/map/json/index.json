@@ -1,0 +1,7 @@
+[
+	{"name":"United States", "cn_name": "美国", "value": 143},
+	{"name":"China", "cn_name": "中国", "value": 51},
+	{"name":"Japan", "cn_name": "日本", "value": 81},
+  {"name":"Afghanistan", "cn_name": "阿富汗", "value": 500},
+  {"name":"Singapore", "cn_name": "新加坡", "value": 500}
+]

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+  /* .main{
+    margin: 0 auto;
+    width: 900px;
+    height: 900px;
+  } */
+	.echart{
+		width: 100%;
+		height: 900px;
+		border: 1px solid #ccc;
+	}
+	</style>
+</head>
+<body>
+  <div class="main">
+    <input type="file" id="importInput" multiple="multiple">
+    <!-- <button class="import-btn">导入</button> -->
+    <button class="import-btn">预览</button>
+    <div id="main-world-map" class='echart'></div>
+  </div>
+
+<script src='js/jquery.min.js'></script>
+<script src="public/echarts/echarts.js"></script>
+<script src="public/echarts/echarts-wordcloud.js"></script>
+<script src="public/echarts/world.js"></script>
+<script src='js/index.js'></script>
+</body>
+</html>
