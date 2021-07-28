@@ -20,7 +20,6 @@ function isEmpty(obj) {
     return false;
   }
 };
-// 字符串数组属性比较
 function compare(property) {
   return function (a, b) {
     var value1 = a[property];
@@ -105,30 +104,29 @@ function worldMap() {
         mapType: 'world',
         roam: true,
         itemStyle: {
-          // 正常展示
-          normal:{
-            label:{
-              show:true,
-              formatter(v) {
-                console.log(v);
-                return v.name + "\n" + (nameMap[v.name]);
-              }
-            }
-          },
-          // 鼠标hover展示
+          // normal:{
+          //   label:{
+          //     show:true,
+          //     formatter(v) {
+          //       console.log(v);
+          //       // return v.name + "\n" + (nameMap[v.name]);
+          //       // return v.name + "\n" + (nameMap[v.name]) +"\n数量："+ v.value;
+          //     }
+          //   }
+          // },
           emphasis: {
             label: {
               show: true,
               formatter(v) {
-                console.log(v);
+                // console.log(v);
                 return v.name + "\n" + (nameMap[v.name]);
               }
             }
           }
         },
         // data:[{ name: 'Canada', value: 28397.812 }],
-        data: echartDataArr,//英文展示
-        // nameMap: nameMap//中文展示
+        data: echartDataArr,
+        // nameMap: nameMap
       }]
     };
     myChartMap.setOption(option);
