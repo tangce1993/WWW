@@ -101,17 +101,31 @@
         // 处理用户的键盘输入
         function handleInput(event) {
             let gridChanged = false;
-            switch (event.key) {
-                case 'ArrowUp':
+            // switch (event.key) {
+            //     case 'ArrowUp':
+            //         gridChanged = slide('up');
+            //         break;
+            //     case 'ArrowDown':
+            //         gridChanged = slide('down');
+            //         break;
+            //     case 'ArrowLeft':
+            //         gridChanged = slide('left');
+            //         break;
+            //     case 'ArrowRight':
+            //         gridChanged = slide('right');
+            //         break;
+            // }
+            switch (event.keyCode) {
+                case 38:
                     gridChanged = slide('up');
                     break;
-                case 'ArrowDown':
+                case 40:
                     gridChanged = slide('down');
                     break;
-                case 'ArrowLeft':
+                case 37:
                     gridChanged = slide('left');
                     break;
-                case 'ArrowRight':
+                case 39:
                     gridChanged = slide('right');
                     break;
             }
@@ -136,7 +150,7 @@
                     if (row[j - 1] === row[j]) {
                         row[j - 1] *= 2;
                         row[j] = '';
-                        if (row[j - 1] = 2048) {
+                        if (row[j - 1] == 2048) {
                             alert('成功！')
                         }
 
