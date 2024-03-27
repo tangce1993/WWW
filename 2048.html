@@ -4,357 +4,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2048游戏</title>
+    <title>2048 Game</title>
+    <style>
+        #game-container {
+            display: grid;
+            grid-template-columns: repeat(4, 100px);
+            grid-template-rows: repeat(4, 100px);
+            gap: 10px;
+            margin: 50px auto;
+        }
 
-    <head>
-        <title>2048 Game</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
-            }
+        .cell {
+            width: 100px;
+            height: 100px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            font-weight: bold;
+        }
 
-            .container {
-                width: 480px;
-                position: relative;
-            }
+        .tile-2 {
+            background: #ccc;
+        }
 
-            .grid-container {
-                display: grid;
-                grid-template-columns: repeat(4, 100px);
-                grid-gap: 15px;
-                background-color: #bbada0;
-                padding: 15px;
-                border-radius: 10px;
-                position: relative;
-            }
+        .tile-4 {
+            background: #777777;
+        }
 
-            .tile {
-                width: 100px;
-                height: 100px;
-                background: #cdc1b4;
-                border-radius: 3px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 30px;
-                font-weight: bold;
-                color: #776e65;
-            }
+        .tile-8 {
+            background: #d8f006;
+        }
 
-            .tile-2 {
-                background: #eee4da;
-            }
+        .tile-16 {
+            background: #93a303;
+        }
 
-            .tile-4 {
-                background: #ede0c8;
-            }
+        .tile-32 {
+            background: #616b01;
+        }
 
-            .tile-8 {
-                background: #f2b179;
-                color: #f9f6f2;
-            }
+        .tile-64 {
+            background: #ec9d42;
+        }
 
-            /* Additional tile styles for 16, 32, 64, etc. go here */
+        .tile-128 {
+            background: #f5c903;
+        }
 
-            .game-message {
-                width: 500px;
-                text-align: center;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                display: none;
-            }
+        .tile-256 {
+            background: #c49103;
+        }
 
-            .game-message p {
-                font-size: 36px;
-                font-weight: bold;
-                color: #776e65;
-            }
+        .tile-512 {
+            background: #f75858;
+        }
 
-            .game-message .button {
-                background: #8f7a66;
-                color: #f9f6f2;
-                border: none;
-                padding: 10px 20px;
-                font-size: 18px;
-                cursor: pointer;
-                margin-top: 20px;
-            }
+        .tile-1024 {
+            background: #f80202;
+        }
 
-            .game-message a {
-                color: inherit;
-                text-decoration: none;
-            }
-        </style>
-    </head>
+        .tile-2048 {
+            background: #a00202;
+        }
+    </style>
+</head>
 
 <body>
-    <div class="container">
-        <div class="grid-container" id="grid-container">
-            <!-- Tiles will be generated here -->
-        </div>
-        <div class="game-message" id="game-message">
-            <p>Game Over!</p>
-            <button class="button" onclick="setup()">Try again</button>
-        </div>
-    </div>
+
+    <div id="game-container"></div>
 
     <script>
-        // Logic for the 2048 game
-        var grid, score, gameOver;
+        const size = 4;
+        let grid = Array(size).fill().map(() => Array(size).fill(''));
 
-        function setup() {
-            grid = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]];
-            score = 0;
-            gameOver = false;
-            addNumber();
-            addNumber();
-            updateView();
-            document.getElementById('game-message').style.display = 'none';
+        function createCell(row, col) {
+            const cell = document.createElement('div');
+            cell.id = `cell-${row}-${col}`;
+            cell.className = 'cell';
+            return cell;
         }
 
+        // 初始化4x4的网格
+        function initializeGame() {
+            const gameContainer = document.getElementById('game-container');
+            for (let row = 0; row < size; row++) {
+                for (let col = 0; col < size; col++) {
+                    gameContainer.appendChild(createCell(row, col));
+                }
+            }
+        }
+
+        document.addEventListener('keydown', handleInput);
+
+        // 处理用户的键盘输入
+        function handleInput(event) {
+            let gridChanged = false;
+            switch (event.key) {
+                case 'ArrowUp':
+                    gridChanged = slide('up');
+                    break;
+                case 'ArrowDown':
+                    gridChanged = slide('down');
+                    break;
+                case 'ArrowLeft':
+                    gridChanged = slide('left');
+                    break;
+                case 'ArrowRight':
+                    gridChanged = slide('right');
+                    break;
+            }
+            // 如果网格发生了改变，添加新的数字并重新渲染界面
+            if (gridChanged) {
+                addNumber();
+                render();
+            }
+        }
+
+        // 根据用户的输入移动和合并数字
+        function slide(direction) {
+            const originalGrid = JSON.stringify(grid);
+            for (let i = 0; i < size; i++) {
+                let row = (direction === 'up' || direction === 'down') ? getColumn(i) : grid[i].slice();
+                row = row.filter(cell => cell !== ''); // Remove empty cells
+                if (direction === 'down' || direction === 'right') {
+                    row.reverse();
+                }
+
+                for (let j = 1; j < row.length; j++) {
+                    if (row[j - 1] === row[j]) {
+                        row[j - 1] *= 2;
+                        row[j] = '';
+                        if (row[j - 1] = 2048) {
+                            alert('成功！')
+                        }
+
+                    }
+                }
+
+                row = row.filter(cell => cell !== ''); // Remove merged cells
+
+                while (size - row.length) {
+                    row.push(''); // Fill the row with empty cells
+                }
+
+                if (direction === 'down' || direction === 'right') {
+                    row.reverse();
+                }
+
+                if (direction === 'up' || direction === 'down') {
+                    for (let j = 0; j < size; j++) {
+                        grid[j][i] = row[j];
+                    }
+                } else {
+                    grid[i] = row;
+                }
+            }
+
+            return JSON.stringify(grid) !== originalGrid;
+        }
+
+        // 获取指定列的数字
+        function getColumn(col) {
+            const column = [];
+            for (let i = 0; i < size; i++) {
+                column.push(grid[i][col]);
+            }
+            return column;
+        }
+
+        // 在空白的格子中随机生成数字2或4
         function addNumber() {
-            var options = [];
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    if (grid[i][j] === 0) {
-                        options.push({
-                            x: i,
-                            y: j
-                        });
+            const availableCells = [];
+            for (let i = 0; i < size; i++) {
+                for (let j = 0; j < size; j++) {
+                    if (!grid[i][j]) {
+                        availableCells.push({ row: i, col: j });
                     }
                 }
             }
-            if (options.length > 0) {
-                var spot = options[Math.floor(Math.random() * options.length)];
-                var randomNumber = Math.random() > 0.5 ? 2 : 4;
-                grid[spot.x][spot.y] = randomNumber;
+
+            if (availableCells.length) {
+                const { row, col } = availableCells[Math.floor(Math.random() * availableCells.length)];
+                grid[row][col] = Math.random() < 0.9 ? 2 : 4;
             }
         }
 
-        function updateView() {
-            var container = document.getElementById('grid-container');
-            container.innerHTML = '';
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    var tile = document.createElement('div');
-                    tile.classList.add('tile');
-                    var value = grid[i][j];
-                    if (value > 0) {
-                        tile.textContent = value;
-                        tile.classList.add('tile-' + value);
+        // 更新并渲染游戏界面
+        function render() {
+            grid.forEach((row, i) => {
+                row.forEach((number, j) => {
+                    const cell = document.getElementById(`cell-${i}-${j}`);
+                    if (number) {
+                        cell.className = 'cell tile-' + number;
+                    } else {
+                        cell.className = 'cell'
                     }
-                    container.appendChild(tile);
-                }
-            }
+
+                    cell.textContent = number || '';
+                });
+            });
         }
 
-        function copyGrid(grid) {
-            var extra = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]];
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    extra[i][j] = grid[i][j];
-                }
-            }
-            return extra;
-        }
-
-        function compare(a, b) {
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    if (a[i][j] !== b[i][j]) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        function slide(row) {
-            var arr = row.filter(val => val);
-            var missing = 4 - arr.length;
-            var zeros = Array(missing).fill(0);
-            arr = zeros.concat(arr);
-            return arr;
-        }
-
-        function combine(row) {
-            for (var i = 3; i >= 1; i--) {
-                var a = row[i];
-                var b = row[i - 1];
-                if (a == b) {
-                    row[i] = a + b;
-                    score += row[i];
-                    row[i - 1] = 0;
-                }
-            }
-            return row;
-        }
-
-        function operate(row) {
-            row = slide(row);
-            row = combine(row);
-            row = slide(row);
-            return row;
-        }
-
-        function flipGrid(grid) {
-            for (var i = 0; i < 4; i++) {
-                grid[i].reverse();
-            }
-            return grid;
-        }
-
-        function rotateGrid(grid) {
-            var newGrid = [[0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0],
-            [0, 0, 0, 0]];
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    newGrid[i][j] = grid[j][i];
-                }
-            }
-            return newGrid;
-        }
-
-        function isGameOver() {
-            for (var i = 0; i < 4; i++) {
-                for (var j = 0; j < 4; j++) {
-                    if (grid[i][j] == 0) {
-                        return false;
-                    }
-                    if (j !== 3 && grid[i][j] === grid[i][j + 1]) {
-                        return false;
-                    }
-                    if (i !== 3 && grid[i][j] === grid[i + 1][j]) {
-                        return false;
-                    }
-                }
-            }
-            return true;
-        }
-
-        function checkGameOver() {
-            if (isGameOver()) {
-                document.getElementById('game-message').style.display = 'block';
-                gameOver = true;
-            }
-        }
-
-        function keyPressed(event) {
-            if (gameOver) {
-                return;
-            }
-            var flipped = false;
-            var rotated = false;
-            var played = true;
-            switch (event.keyCode) {
-                case 39: // Right
-                    // No action needed
-                    break;
-                case 40: // Down
-                    grid = rotateGrid(grid);
-                    rotated = true;
-                    break;
-                case 37: // Left
-                    grid = flipGrid(grid);
-                    flipped = true;
-                    break;
-                case 38: // Up
-                    grid = rotateGrid(grid);
-                    rotated = true;
-                    flipped = true;
-                    break;
-                default:
-                    played = false;
-            }
-
-            if (played) {
-                var past = copyGrid(grid);
-                for (var i = 0; i < 4; i++) {
-                    grid[i] = operate(grid[i]);
-                }
-                var changed = compare(past, grid);
-                if (flipped) {
-                    grid = flipGrid(grid);
-                }
-                if (rotated) {
-                    grid = rotateGrid(grid);
-                    grid = rotateGrid(grid);
-                    grid = rotateGrid(grid);
-                }
-                if (changed) {
-                    addNumber();
-                }
-                updateView();
-                checkGameOver();
-            }
-        }
-
-        document.addEventListener('keydown', keyPressed);
-
-        // Variables to track touch start positions
-        var touchStartX = null;
-        var touchStartY = null;
-
-        // Event listener for touch start
-        document.addEventListener('touchstart', function (event) {
-            if (event.touches.length > 1) return; // Only single touch events
-
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-            event.preventDefault(); // Prevent scrolling when inside DIV
-        }, { passive: false });
-
-        // Event listener for touch move
-        document.addEventListener('touchmove', function (event) {
-            event.preventDefault(); // Prevent scrolling when inside DIV
-        }, { passive: false });
-
-        // Event listener for touch end
-        document.addEventListener('touchend', function (event) {
-            if (!touchStartX || !touchStartY || gameOver) return;
-
-            var deltaX = event.changedTouches[0].clientX - touchStartX;
-            var deltaY = event.changedTouches[0].clientY - touchStartY;
-
-            // Determine swipe direction
-            if (Math.abs(deltaX) > Math.abs(deltaY)) { // Horizontal swipe
-                if (deltaX > 0) {
-                    moveRight();
-                } else {
-                    moveLeft();
-                }
-            } else { // Vertical swipe
-                if (deltaY > 0) {
-                    moveDown();
-                } else {
-                    moveUp();
-                }
-            }
-
-            touchStartX = null;
-            touchStartY = null;
-        });
-
-        // Move functions
-        function moveLeft() { keyPressed({ keyCode: 37 }); }
-        function moveUp() { keyPressed({ keyCode: 38 }); }
-        function moveRight() { keyPressed({ keyCode: 39 }); }
-        function moveDown() { keyPressed({ keyCode: 40 }); }
-
-        setup();
+        initializeGame();
+        addNumber();
+        addNumber();
+        render();
     </script>
+
 </body>
 
 </html>
